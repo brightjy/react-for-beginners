@@ -8,26 +8,20 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel">
       const root = document.getElementById("root");
-      //컴포넌트의 첫 글자는 반드시 '대문자' 
-      //아래는 JSX를 활용해 컴포넌트를 컴포넌트 안에 넣는 방법
-      const Title = () => (
-        <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>
-          Hello I'm a title.
-        </h3>);
-      const Button = () => (
-        <button style={{
-                  backgroundColor: "tomato",
-                }} 
-                onClick={() => console.log("I'm clicked")}
-        >
-          Click me
-        </button>);
+      let counter = 0;
+      function countUp() {
+        counter += 1;
+        render(); // 클릭 할 때 re-render Container
+      }
+      function render() {
+        ReactDOM.render(<Container />, root);
+      }
       const Container = () => (
           <div>
-            <Title /> 
-            <Button />
+            <h3>Total Clicks: {counter}</h3>
+            <button onClick={countUp}>Click me</button>
           </div>
         );
-      ReactDOM.render(<Container />, root);
+      ReactDOM.render(<Container />, root); // 시작할 때만 render Container
     </script>
 </html>
